@@ -151,3 +151,206 @@
 		- then (x,y,z) -> (-x/z,-y/z)
 		- more generally, for any location d along the z axis
 		- (x,y,z) -> (dx/z,dy/z)
+
+### SL-4 Light and Optics
+
+- resons for understanding light propagation
+	- light is emitted from displays and arrives on our retinas
+	- construction of virtual worlds
+	- understanding how cameras work
+- basic behavior of light
+	- photons
+	- waves
+	- rays
+- interactions with materials
+	- transmission (transparent material)
+	- absorption
+	- reflection (specular reflection, diffuse reflection)
+- conherent vs. jumbled light
+	- light source do not emit coherent light usually
+	- they emit jumble of waves
+- wavelength corresponds to spectral colors
+	- spectral power distribution
+	- spectral reflection function
+	- the X colored wavelength must be included in the light source and the surface must strongly reflect X color for us to perceive it as X colored
+- frequency
+	- number of times per second that wave peaks pass through a fixed location
+	- *f = s / lambda*, where s is the light speed within the object, lambda is wavelength
+	- s smaller in denser media (i.e. water, lenses) -> the difference of s in different medias is the basis of optical systems
+- lenses
+	- VR headsets are unlike classical optical devices
+	- lens design patterns for VR are still being written
+	- *refractive index n = c / s*, where c is the speed of light in vacuum, and s is the speed of light in a medium
+	- lenses work because of *Snell's Law*
+		- expresses how much rays of light bend when entering or exiting a transparent material
+		- *n1 * sin(t1) = n2 * sin(t2)*, where n is the refractive indices and t is the refractive angle
+	- prisms
+		- a lens is like a stack of prisms that force diverging rays to converge through the power of refraction
+		- the bending depends only on the angle once n is fixed, rather on the thickness of the prism
+	- focal point (for convex lens)
+		- *1/s1 + 1/s2 = 1/f*, where s1 is the distance of the object from the lens, s2 is the distance of the real image
+		- note when s1 > f, we have s2 > f
+		- ideally when s1 -> inf, s2 = f, hence rays are not parallel
+		- when s1 > f, still |s2| > f but in negative direction: lens works as a *magnifying* glass (we have a virtual image instead), this is the way lenses are commonly used for VR headsets
+	- *lensmaker's equation*
+		- *(n2 - n1) * (1/r1 + 1/r2) = 1/f*, where r1 and r2 are the radius of curvature of each of the two lens surfaces (front and back), here a *thin lens approximation* is assumed, which means that the lens thickness is small relative to r1 and r2
+	- concave lens
+		- similar to convex ones, but f < 0
+	- diopters: combine lenses
+		- *D = 1/f*, diopter = reciprocal of focal length
+		- if combining multiple lenses, we add the diopters
+		- hence *1/f_final = 1/f1 + ... + 1/fn*
+- optical aberrations: imperfections that degrade the images formed by lenses
+	- *chromatic aberration*: (color difference), caused by longer wavelengths travel more quickly through the lens
+	- *spherical aberration*: rays away from the optical axis are refracted more than those at the periphery (inner side)
+	- optical distortion
+- human eye
+	- cornea: powerful lens but fixed focal depth
+	- lens: variable focal depth
+	- image surface: non-planar
+	- accommodation: eye muscles and reading glasses (convex lens)
+	- VR headset: lens is placed so that screen is infintely far
+
+### SL-5 The Physiology of Human Vision
+
+- part of the eye
+	- iris (hong muo)
+	- pupil (tong kong)
+	- cornea (yan jiao muo)
+	- retina (shi wang muo)
+	- ciliary muscle (jie zhuang ji)
+- *photoreceptors* (light sensor of our eye)
+	- *rods*: sense low level light
+	- *cones*: sense high level light, color (has 3 categories with different wavelengths)
+	- *scotopic vision*: a monochromatic mode that our eye take long time to fully adapt to low light (activate rods)
+	- *photopic vision*: a trichromatic mode that our eye take a mid-long time to become active in brighter light (activate cones)
+	- *fovea* (yan wo): has the greatest concentration of photoreceptors
+	- *peripheral vision* (yu guang)
+	- blind spot
+- eye movements
+	- voluntarily and involuntarily
+	- reason for evey movement: position the feature of interest on the fovea
+	- eye muscles: to perform yaw, pitch and small # of roll
+- type of eye movement
+	- *saccades* (voluntary): quickly relocate fovea, object scan
+	- *smooth pursuit* (voluntary): reduce motion blur on retina, image stabilization
+	- *vergence* (voluntary, disjunctive): transition from close to far feature (divergence), opposite (convergence)
+	- *vestibulo-ocular reflex (VOR)* (involuntary): image stabilization, important for VR
+	- *optokinetic reflex* (involuntary): the fact of watching a fast-moving object, alternating between smooth pursuit and saccade motions
+	- *microsaccades* (involuntary): augment other 5, control of fixations and reduce perceptual fading
+- implications for VR
+	- spatial resolution: how many pixels needed
+		- when not enough: aliasing, screen-door effect
+	- intensity resolution and range: how many internsity values produced
+	- temporal resolution: how fast display need to change pixels
+	- *foveated rendering*: only display where the eye focused (not for commercial use yet)
+	- *vergence-accommodation mismatch*: the stimulus of VR is inconsistent with the real world
+
+### SL-6.1 Depth Perception
+
+- visual perception: low-level hardware to high-level software and algorithms
+	- VR can be seen as a grand optical illusion
+- perception of depth
+	- perceived distance can be metric ("felt" as if object are far or close)
+	- distance information is ordinal - relative arrangement
+	- *sensory cue*: a piece of info that is derived from sensory stimulation and is relevant for perception
+	- *monocular depth cue*: derived from photoreceptors or movements of a single eye
+	- *stereo depth cue*: both eyes needed
+- monocular depth cues
+	- *size constancy scaling*: we assume object goes closer -> it becomes larger -> retinal image size
+	- height in the visual field
+	- *motion parallax*: closer object displacement larger than further ones
+	- others: shadows, interposition, image blur, atmospheric cue
+- stereo depth cues
+	- *binocular disparity*: different image of two eyes
+	- *diplopia* (fu shi): when concentrating one object, other objects appear to be two
+- implications for VR
+	- incorrect scale perception: we cannot determine the scale of unfamiliar objects
+	- mismatches due to incorrect depth cues
+	- monocular cues is important to depth perception
+
+### SL-6.2 Motion and Color Perception
+
+- perception of motion
+	- *the aperture problem*: cannot determine large objects movement if its edges are not visible
+	- *stroboscopic apparent motion* (pin shan): fast moving objects seem to be connected and vice versa (phi phenomenon and beta movement)
+	- VR implication - perception of stationarity by pin shan
+- perception of color
+	- HSV color space: hue, saturation, value
+	- CIE color space
+	- *color constancy*: perceive an object as having the same color over a wide variety of lighting condition (checker shadow illusion)
+- combine sources of information
+	- multistable perception (bistable perception): Necker cube, rabbit duck illusion
+	- McGurk effect: mix visual and auditory cues
+- implications for VR
+	- not all sense are taken over by VR
+	- most problematic: *vection* - sickness-causing conflict
+	- VR is quite capable of generating new multistable perceptions
+
+### SL-7.1 Ray Tracing and Shading Models
+
+- visual rendering
+	- where objects are in virtual world: geometric models, rigid body transformations, viewpoint transformations
+	- how objects appear in virtual world: light propagation, visual physiology, visual perception
+	- visual rendering: combined -> virtual world generator (VWG)
+- primitives: finite objects to represent infinite points
+	- triangle vertices ((x1, y1, z1), (x2, y2, z2), (x3, y3, z3))
+	- mesh: large # of triangles
+- visual computation
+- object-order vs. image-order rendering
+	- object-order: for each object -> for each pixel -> if object affects pixel -> do sth
+	- image-order: for each pixel -> for each object -> if object affects pixel -> do sth
+- ray tracing
+	- ray casting: determine what part of the virtual world is visible
+	- shading models: spectral power distribution and spectral reflection function
+- *Lambertian shading*
+	- the amount of energy from a light source that falls on an area of surface depends on the angle of the surface to the light
+	- the light reaching the pixel depends on the angle between the incoming light *l* and the surface normal *n*, but independent of the viewing angle
+	- *R = dR * IR * max(0, n * l)*
+	- *G = dG * IG * max(0, n * l)*
+	- *B = dB * IB * max(0, n * l)*
+	- vector notation: *L = d * I * max(0, n * l)*, where d is the spectral reflectance property of the material, I is the spectral power distribution of the light source
+- *Blinn-Phong shading*
+	- the light reaching the pixel depends on the angle between the normal *n* and the bisector *b* of the light *l* and reflected light *v*
+	- if *n = b*, then ideal reflection is obtained (a mirror)
+	- *L = Lambertian shading + s * I * max(0, n * b) ^ x*, where x is a material property that expresses the amount of surface shininess
+	- Blinn-Phong shadding additively takes into account the shading due to both diffuse and specular components
+- *Ambient shading*: cause object to glow without being illuminated by a light source
+	- *L = Blinn-Phong shading + La*, where La is the ambient light component
+	- to avoid surfaces in shadows of the light source from appearing black
+- multiple light sources
+	- from N light source we have the following
+	- *L = sum(i:1->n, Blinn-Phong shading_i) + La*, where each *Li = d * Ii * max(0, n * li) + s * Ii * max(0, n * bi) ^ x*, and Ii, li, bi correspond to each source
+- *bidirectional reflectance distribution function (BRDF)*
+	- specify the ratio of incoming and outgoing light energy for all possible perspectives
+	- to account for shading in a more precise and general way
+	- *f(ti, gi, tr, gr) = radiance / irradiance*
+	- *radiance* is the light energy reflected from the surface in directions tr and gr
+	- *irradiance* is the light energy arriving at the surface from directions ti and gi
+- global illumination
+	- calculate how light reflects from object to object
+	- need to reduce rendering complexity from multiple reflections
+
+### SL-7.2 Rasterization
+
+- more efficient: object-order rendering > image-order rendering
+- *rasterization*: main function of GPU, do object-order rendering of primitives
+- depth order
+	- *Painter's Algorithm*
+	- flaw: depth cycles
+	- fix: depth buffer (z-buffer) - record the distance of the triangle from the focal point to the intersection point of the ray that intersects the triangle at that pixel
+- *Barycentric coordinates*
+	- a simple method for linearly interpolating vaues across a triangle
+	- *p = a1 * p1 + a2 * p2 + a3 * p3*
+	- *0 <= a1, a2, a3 <= 1*
+	- *a1 + a2 + a3 = 1*
+	- it specifies the location of every point p in a triangle as a weighted avg of its vertices p1, p2, p3
+- mapping the surface
+	- *R/G/B = a1 * R1/G1/B1 + a2 * R2/G2/B2 + a3 * R3/G3/B3*
+	- texture mapping: as if the texture is painted on the primtives
+	- normal mapping: allow the surface normal to be varied over the triangle (although geometrically impossible)
+- aliasing
+	- spatial aliasing: fix by supersampling
+- culling
+	- preprocess phase to eliminate the primitives before rendering them
+	- *view volume culling*: eliminate all primitives wholly outside of the viewing frustum
